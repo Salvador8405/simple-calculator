@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>calculator</title>
+	<style type="text/css">
+/***** main styles *****/
+*
+{
+	margin: 0;
+	padding: 0;
+	outline: none;
+}
+
+body,html
+{
+	height: 100%;
+}
+
+/***** light mode *****/
+
+.light-form
+{
+	background-color: #4673f5;
+	width: 300px;
+	height: 390px;
+	border-radius: 10px;
+	position: relative;
+	top: 51%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border: 5px groove navy;
+}
+
+
+.light-display
+{
+	background: #ddd;
+	height: 70px;
+	font-size: 16pt;
+	text-align: right;
+	border-radius: 8px;
+	margin: 10px;
+	width: calc(100% - 40px);
+	border: none;
+	padding: 0 10px;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+#calculation
+{
+	background-color: red;
+	color: #fff;
+	font-size: 17pt;
+}
+
+.light-button
+{
+	float: left;
+	width: calc(100% / 5);
+	background: #fff;
+	border-radius:50%;
+	height: 49px;
+	text-align: center;
+	margin: 4px 0 6px 12px;
+	border: none;
+	font-size: 14pt;
+}
+
+input[type="button"]:active
+{
+	transform: scale(.95);
+}
+
+.light-equal
+{
+	background: #91e374;
+	width: 135px;
+	height: 43px;
+	margin-top: 7px;
+	border-radius: 9px;
+}	
+
+.clearfix
+{
+	clear: both;
+}
+
+.change-mode
+{
+	width: 300px;
+	height: 35px;
+	position: relative;
+	top: 28.7%;
+	left: 38.6%;
+	font-size: 16pt;
+}
+
+.change-mode .on
+{
+	display: none
+}
+
+.d-mode-btn-light
+{
+	margin-left: 105px;
+	padding: 5px 20px 5px;
+	color: #fff;
+	background-color: #dc00ff;
+	transform: scale(.94);
+	font-size: 14pt;
+	border-radius: 4px;
+}
+
+/***** dark mode *****/
+.d-mode-btn-dark
+{
+	margin-left: 104px;
+	padding: 4px 25px 4px;
+	color: #000;
+	background-color: #df75f0;
+	transform: scale(.94);
+	font-size: 14pt;
+	border-radius: 4px;
+}
+
+.dark-body
+{
+	background-color: #222;
+}
+
+.light-text
+{
+	color: #fff;
+}
+
+.dark-text
+{
+	color: #000;
+}
+
+.dark-form
+{
+	background-color: aqua;
+	width: 300px;
+	height: 390px;
+	border-radius: 10px;
+	position: relative;
+	top: 51%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border: 5px groove #d8ecf3;
+}
+
+.dark-display
+{
+	background: #ffffff;
+	height: 70px;
+	text-align: right;
+	border-radius: 8px;
+	margin: 10px;
+	width: calc(100% - 40px);
+	border: none;
+	padding: 0 10px;
+}
+
+.dark-button
+{
+	float: left;
+	width: calc(100% / 5);
+	background: #222;
+	color: #fff;
+	border-radius:50%;
+	height: 49px;
+	text-align: center;
+	margin: 4px 0 6px 12px;
+	border: none;
+	font-size: 14pt;
+}
+
+.dark-equal
+{
+	background: green;
+	color: #fff;
+	width: 135px;
+	height: 43px;
+	margin-top: 7px;
+	border-radius: 9px;
+}
+
+	</style>
+	
+</head>
+<body>
+	<div class="change-mode"><span class="D-mode">Dark mode :</span> <button class="d-mode-btn-light" onclick="change()">OFF</button></div>
+	<form class="light-form" action="" name="calc">
+		<input class="light-display" type="text" value="" name="display" disabled>
+		<input class="light-button" type="button" value="AC" onclick="delAll()">
+		<input class="light-button" type="button" value="C" onclick="del()">
+		<input class="light-button" type="button" value="%" onclick="data(this.value)">
+		<input class="light-button" type="button" value="-" onclick="data(this.value)" id="calculation">
+		<input class="light-button" type="button" value="9" onclick="data(this.value)">
+		<input class="light-button" type="button" value="8" onclick="data(this.value)">
+		<input class="light-button" type="button" value="7" onclick="data(this.value)">
+		<input class="light-button" type="button" value="*" onclick="data(this.value)" id="calculation">
+		<input class="light-button" type="button" value="6" onclick="data(this.value)">
+		<input class="light-button" type="button" value="5" onclick="data(this.value)">
+		<input class="light-button" type="button" value="4" onclick="data(this.value)">
+		<input class="light-button" type="button" value="/" onclick="data(this.value)" id="calculation">
+		<input class="light-button" type="button" value="3" onclick="data(this.value)">
+		<input class="light-button" type="button" value="2" onclick="data(this.value)">
+		<input class="light-button" type="button" value="1" onclick="data(this.value)">
+		<input class="light-button" type="button" value="+" onclick="data(this.value)" id="calculation">
+		<input class="light-button" type="button" value="0" onclick="data(this.value)">
+		<input class="light-button" type="button" value="." onclick="data(this.value)">
+		<input class="light-equal light-button" type="button" value="=" onclick="equal()">
+		<div class="clearfix"></div>
+	</form>	
+
+
+
+
+	<script type="text/javascript">
+
+		let activeMode = 0;
+
+
+		function data(val) {
+			calc.display.value += val;
+		}
+
+		function del() {
+			calc.display.value = calc.display.value.slice(0 , -1);
+		}
+
+		function delAll() {
+			calc.display.value = null;
+		}
+
+		function equal() {
+		calc.display.value = eval(calc.display.value);	
+		}
+
+		function change() {
+
+			activeMode = activeMode === 0? 1 : 0;
+
+			if (activeMode == 1) {
+			document.querySelector('.d-mode-btn-light').classList.add('d-mode-btn-dark');
+			document.querySelector('.d-mode-btn-light').innerHTML = 'ON';
+			document.querySelector('body').classList.add('dark-body');
+			document.querySelector('.D-mode').classList.add('light-text');
+			document.querySelector('.light-form').classList.add('dark-form');
+			document.querySelector('.light-display').classList.add('dark-display');
+			darkButton();
+			} 
+			else {
+			document.querySelector('.d-mode-btn-light').classList.remove('d-mode-btn-dark');
+			document.querySelector('.d-mode-btn-light').innerHTML = 'OFF';
+			document.querySelector('body').classList.remove('dark-body');
+			document.querySelector('.D-mode').classList.remove('light-text');
+			document.querySelector('.light-form').classList.remove('dark-form');
+			document.querySelector('.light-display').classList.remove('dark-display');
+			lightButton();
+			}
+
+		}
+
+	function darkButton() {
+		document.getElementsByClassName('light-button')[0].classList.add('dark-button');
+		document.getElementsByClassName('light-button')[1].classList.add('dark-button');
+		document.getElementsByClassName('light-button')[2].classList.add('dark-button');
+		document.getElementsByClassName('light-button')[3].classList.add('dark-button');
+		document.getElementsByClassName('light-button')[4].classList.add('dark-button');
+		document.getElementsByClassName('light-button')[5].classList.add('dark-button');
+		document.getElementsByClassName('light-button')[6].classList.add('dark-button');
+		document.getElementsByClassName('light-button')[7].classList.add('dark-button');
+		document.getElementsByClassName('light-button')[8].classList.add('dark-button');
+		document.getElementsByClassName('light-button')[9].classList.add('dark-button');
+		document.getElementsByClassName('light-button')[10].classList.add('dark-button');
+		document.getElementsByClassName('light-button')[11].classList.add('dark-button');
+		document.getElementsByClassName('light-button')[12].classList.add('dark-button');
+		document.getElementsByClassName('light-button')[13].classList.add('dark-button');
+		document.getElementsByClassName('light-button')[14].classList.add('dark-button');
+		document.getElementsByClassName('light-button')[15].classList.add('dark-button');
+		document.getElementsByClassName('light-button')[16].classList.add('dark-button');
+		document.getElementsByClassName('light-button')[17].classList.add('dark-button');
+	}
+
+	function lightButton() {
+		document.getElementsByClassName('light-button')[0].classList.remove('dark-button');
+		document.getElementsByClassName('light-button')[1].classList.remove('dark-button');
+		document.getElementsByClassName('light-button')[2].classList.remove('dark-button');
+		document.getElementsByClassName('light-button')[3].classList.remove('dark-button');
+		document.getElementsByClassName('light-button')[4].classList.remove('dark-button');
+		document.getElementsByClassName('light-button')[5].classList.remove('dark-button');
+		document.getElementsByClassName('light-button')[6].classList.remove('dark-button');
+		document.getElementsByClassName('light-button')[7].classList.remove('dark-button');
+		document.getElementsByClassName('light-button')[8].classList.remove('dark-button');
+		document.getElementsByClassName('light-button')[9].classList.remove('dark-button');
+		document.getElementsByClassName('light-button')[10].classList.remove('dark-button');
+		document.getElementsByClassName('light-button')[11].classList.remove('dark-button');
+		document.getElementsByClassName('light-button')[12].classList.remove('dark-button');
+		document.getElementsByClassName('light-button')[13].classList.remove('dark-button');
+		document.getElementsByClassName('light-button')[14].classList.remove('dark-button');
+		document.getElementsByClassName('light-button')[15].classList.remove('dark-button');
+		document.getElementsByClassName('light-button')[16].classList.remove('dark-button');
+		document.getElementsByClassName('light-button')[17].classList.remove('dark-button');
+	}
+
+	</script>
+</body>
+</html>
